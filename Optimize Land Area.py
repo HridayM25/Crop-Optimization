@@ -5,6 +5,18 @@
 
 
 from scipy.optimize import linprog
+from InferenceModel import infer
+from growthTime import crop_to_time_dict
+from averageArea import crop_to_area_dict
+
+top_crops, probs = infer()
+
+time_to_grow = [crop_to_time_dict[crop] for crop in top_crops]
+output_per_area = [crop_to_area_dict[crop] for crop in top_crops]
+
+"""
+Top crops will be a list where each item of this list will be a key to the dictionary we will make
+"""
 
 def allocate_optimal_land():
     """
