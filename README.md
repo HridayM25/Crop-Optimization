@@ -1,5 +1,6 @@
 Things yet to do : 
 
+Look into how the rainfall can be found based on the pressure and moisture given by our IoT device. If not, time series is always there. Can add these as features to them.
 1) Fetch the time series for all the crops listed. Run LGBM Prediction for forecasting or Prophet.
 
 2) Buying Price is the price for the last entry 
