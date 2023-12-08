@@ -9,3 +9,5 @@ Look into how the rainfall can be found based on the pressure and moisture given
 
 4) After collecting this data, make changes to allocateArea.py 
 
+5) After we have n farmers data, we can cluster them. Optimal clusters finding process will be automated and hence we can cluster the farmers together.
+
