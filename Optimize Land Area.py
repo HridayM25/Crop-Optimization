@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[32]:
-
 
 from scipy.optimize import linprog
 from InferenceModel import infer
@@ -47,7 +45,7 @@ def allocate_optimal_land():
 
     c = [-(price_per_kg[i]*scaled_growth[i]*output_per_area[i]) for i in range(len(time_to_grow))]
 
-    A_eq = [[1, 1, 1, 1, 1], [buying_price[i]*output_per_area[i] for i in range(len(buying_price))]]
+    A_eq = [[1, 1, 1, 1, 1], [buying_price[i]*output_per_area[i]*scaled_growth[i] for i in range(len(buying_price))]]
 
     b_eq = [total_land_area, current_money]
 
@@ -63,10 +61,6 @@ def allocate_optimal_land():
 
     for j, allocation in enumerate(land_allocation):
         print(f"Allocate {allocation:.2f} units of land to Crop {j + 1}")
-
-
-# In[33]:
-
 
 allocate_optimal_land()
 
