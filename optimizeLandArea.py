@@ -6,17 +6,39 @@ from scipy.optimize import linprog
 from InferenceModel import infer
 from growthTime import crop_to_time_dict
 from averageArea import crop_to_area_dict
+from prophetInference import forecasted_prediction
+from CropModelFinalization import get_mapping
+
+
+#from dictPriceSeries import dataframes
 
 top_crops, probs = infer()
+maps = get_mapping()
 
-time_to_grow = [crop_to_time_dict[crop] for crop in top_crops]
-output_per_area = [crop_to_area_dict[crop] for crop in top_crops]
+#Top crops is a list containing the top 3 crops. Can make a dictionary with the 
+#crop as the key and the dataframe as the value.
+
+
+
+time_to_grows = [crop_to_time_dict[crop] for crop in top_crops]
+dataframes ={}
+
+buying_price_list = []
+selling_price_list = []
+
+for crop in top_crops:
+    grow_time = crop_to_time_dict[crop]
+    buying_price, selling_price = forecasted_prediction(dataframes[crop], grow_time)
+    buying_price_list.append(buying_price)
+    selling_price_list.append(selling_price)
+
+output_per_areas = [crop_to_area_dict[crop] for crop in top_crops]
 
 """
 Top crops will be a list where each item of this list will be a key to the dictionary we will make
 """
 
-def allocate_optimal_land():
+def allocate_optimal_land(current_money = 70,buying_price = buying_price_list, price_per_kg= selling_price_list, time_to_grow = time_to_grows, output_per_area = output_per_areas):
     """
     
     Arguments : top_crops, current_money, buying_price, selling_price, output_per_area, time_to_grow
@@ -33,11 +55,12 @@ def allocate_optimal_land():
     time_to_grow : dictionary for each crop
     
     """
-    current_money = 70
-    buying_price = [4,6,7,80,5]
-    price_per_kg = [10, 8, 12, 99, 9]
-    output_per_area = [0.5, 4, 2, 4, 7]
-    time_to_grow = [10, 4, 2, 1, 6]
+    #current_money = 70
+    #buying_price = [4,6,7,80,5]
+    #price_per_kg = [10, 8, 12, 99, 9]
+    #output_per_area = [0.5, 4, 2, 4, 7]
+    #time_to_grow = [10, 4, 2, 1, 6]
+
     max_time_to_grow = max(time_to_grow) 
 
     scaled_growth = [max_time_to_grow//x for x in time_to_grow]
