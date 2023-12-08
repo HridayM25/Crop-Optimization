@@ -6,5 +6,5 @@ Things yet to do :
 
 3) Selling Price is the price according to the average time growth, so average_time_growth + last entry.
 
-4) After collecting this data, makes changes to allocateArea.py 
+4) After collecting this data, make changes to allocateArea.py 
 
